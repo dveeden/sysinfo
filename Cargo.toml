@@ -34,6 +34,7 @@ tempfile = "3.2"
 
 [target.'cfg(target_os = "freebsd")'.dependencies]
 sysctl = "0.4.1"
+raw-cpuid = "9.0.0"
 
 [lib]
 name = "sysinfo"
