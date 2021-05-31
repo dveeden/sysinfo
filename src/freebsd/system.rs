@@ -22,17 +22,24 @@ pub struct System {
 }
 
 impl SystemExt for System {
-    fn new_with_specifics(_: RefreshKind) -> System {
-        System {
+    fn new_with_specifics(refreshes: RefreshKind) -> System {
+        let mut s = System {
             processes_list: Default::default(),
             networks: Networks::new(),
             global_processor: Processor::new(),
-        }
+        };
+		s.refresh_specifics(refreshes);
+
+		s
     }
 
     fn refresh_memory(&mut self) {}
 
-    fn refresh_cpu(&mut self) {}
+    fn refresh_cpu(&mut self) {
+		self.global_processor.frequency = get_cpu_frequency();
+		self.global_processor.brand = get_cpu_brand();
+		self.global_processor.vendor_id = get_cpu_vendor();
+	}
 
     fn refresh_components_list(&mut self) {}
 
